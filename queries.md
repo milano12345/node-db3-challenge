@@ -8,16 +8,21 @@ INNER JOIN Categories as c on P.CategoryID = c.CategoryID
 ### Display the OrderID and ShipperName for all orders placed before January 9, 1997. Shows 161 records.
 
 SELECT O.OrderID, S.ShipperName from Orders as O
-LEFT JOIN Shippers as S on O.ShipperID
+LEFT JOIN Shippers as S on O.ShipperID = S.ShipperID
 WHERE O.OrderDate < '1997-01-09'
 
 ### Display all ProductNames and Quantities placed on order 10251. Sort by ProductName. Shows 3 records.
 
-SELECT OD.OrderID, P.ProductName, OD.Quantity FROM OrderDetails as OD
-JOIN Products as P on OD.OrderID
+SELECT P.ProductName, OD.Quantity FROM OrderDetails as OD
+JOIN Products as P on OD.ProductID = P.ProductID
 WHERE OD.OrderID = '10251'
 
 ### Display the OrderID, CustomerName and the employee's LastName for every order. All columns should be labeled clearly. Displays 196 records.
+
+SELECT O.OrderID, C.CustomerName, E.LastName from Orders as O,
+JOIN Customers as C on O.CustomerID = C.CustomerID,
+JOIN Employees as E on O.EmployeeID = E.EmployeeID
+
 
 ### (Stretch) Displays CategoryName and a new column called Count that shows how many products are in each category. Shows 9 records.
 
